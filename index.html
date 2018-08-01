@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="edge">
+    <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
+    <meta name="applicable-device" content="pc">
+    <meta name="baidu-site-verification" content="eiYnuWzotY" />
+    <title></title>
+</head>
+
+<body>
+    <div id="root"></div>
+    <% for (var i = 0; i < htmlWebpackPlugin.options.extra.length;i++) { %>
+        <script type="text/javascript" src="<%=htmlWebpackPlugin.options.extra[i] %>"></script>
+    <% } %>
+    <div id="app"></div>
+</body>
+
+</html>
