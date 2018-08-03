@@ -1,7 +1,6 @@
 const path = require("path");
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const webpackFile = require("./webpack.file.conf");
 const baseWebpackConfig = require("./webpack.base.conf");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
@@ -18,13 +17,20 @@ let config = merge(baseWebpackConfig, {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.js$/,
         use: [
-          'cache-loader',
-          'babel-loader'
+          "babel-loader",
+          "source-map-loader"
         ],
+        exclude: [
+          path.resolve(__dirname, "../node_modules")
+        ],
+      },
+      { 
+        test: /\.tsx?$/, 
+        loader: "awesome-typescript-loader", 
         include: [
-          path.resolve(__dirname, "../index")
+          path.resolve(__dirname, "../src")
         ],
         exclude: [
           path.resolve(__dirname, "../node_modules")
@@ -44,7 +50,7 @@ let config = merge(baseWebpackConfig, {
       },
       {
         test: /\.(png|jpg|gif|ttf|eot|woff|woff2|svg)$/,
-        loader: 'url-loader?limit=8192&name=[name].[hash:8].[ext]&outputPath=' + webpackFile.resource + '/'
+        loader: 'url-loader?limit=8192&name=[name].[hash:8].[ext]&outputPath=dist/imgs/'
       },
       {
         test: /\.swf$/,

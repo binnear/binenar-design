@@ -2,10 +2,10 @@ const path = require('path');
 const opn = require('opn');
 let config = {
   entry: {
-    app:['babel-polyfill', path.resolve(__dirname, '../index.js')]
+    app:path.resolve(__dirname, '../src/index.tsx')
   },
   resolve: {
-    extensions: [".js", ".json", ".jsx"],
+    extensions: [".js", ".json", ".tsx"],
   },
   optimization: {
     // 包清单
