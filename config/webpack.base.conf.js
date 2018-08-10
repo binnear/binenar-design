@@ -2,10 +2,16 @@ const path = require('path');
 const opn = require('opn');
 let config = {
   entry: {
-    app:path.resolve(__dirname, '../src/index.tsx')
+    app: path.resolve(__dirname, '../src/index.tsx')
   },
   resolve: {
     extensions: [".js", ".json", ".tsx"],
+    alias: {
+      components: path.resolve(__dirname, '../src/components'),
+      actions: path.resolve(__dirname, '../src/actions'),
+      reducers: path.resolve(__dirname, '../src/reducers'),
+      store: path.resolve(__dirname, '../src/store'),
+    }
   },
   optimization: {
     // 包清单
