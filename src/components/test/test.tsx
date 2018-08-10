@@ -1,6 +1,8 @@
 import * as React from "react";
+import * as moment from 'moment';
 import { connect } from 'react-redux';
-import { test } from '../../actions'
+import { test } from 'actions';
+import DateTime from 'components/datetime/datetime'
 
 interface TestProps { data: string; test: Function; }
 
@@ -13,9 +15,23 @@ class Test extends React.Component<TestProps> {
     const { test } = this.props;
     test('ok')
   }
+  changeTime = (e: any) => {
+
+  }
   render() {
     const { data } = this.props
-    return <div onClick={this.changeValue}>{data}</div>
+    const datetimeProps = {
+      width: '380',
+      className: '',
+      formatter: '',
+      onChange: this.changeTime,
+      placeholder: '',
+      value: moment(),
+    }
+    return <div onClick={this.changeValue}>
+      <div>{data}</div>
+      <DateTime {...datetimeProps} />
+    </div>
   }
 }
 
