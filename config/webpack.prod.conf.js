@@ -21,30 +21,42 @@ let config = merge(baseWebpackConfig, {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.js$/,
         use: [
-          'babel-loader'
+          "babel-loader",
+        ],
+        exclude: [
+          path.resolve(__dirname, "../node_modules")
         ],
       },
       {
-        test: /\.(js|jsx)$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
+        test: /\.tsx*?$/,
+        exclude: /node_modules/,
+        loader: require.resolve('ts-loader'),
+        options: {
+          transpileOnly: true,    // 让 ts-loader 只负责编译代码，不检查类型
+        },
       },
       {
         test: /\.pcss$/,
         use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: ['css-loader?modules,localIdentName="css-[hash:base64:6]"', 'postcss-loader']
-        })
-      },
-      {
-        test: /\.less$/,
-        use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
           use: [
-            { loader: 'css-loader' },
-            { loader: 'less-loader', options: { javascriptEnabled: true } }]
+            {
+              loader: 'css-loader',
+              options: {
+                importLoaders: 1,
+                modules: true,    // 开启了 CSS Module
+                namedExport: true,
+                camelCase: true,
+                minimize: true,
+                localIdentName: '[local]_[hash:base64:5]',
+              },
+            },
+            {
+              loader:'postcss-loader',
+            },
+          ],
+          fallback: 'style-loader',
         })
       },
       {
@@ -65,10 +77,10 @@ let config = merge(baseWebpackConfig, {
       width: 60
     }),
     // css分页生成
-    // new ExtractTextPlugin({
-    //   filename: 'css/[name].[md5:contenthash:hex:8].css',
-    //   allChunks: true
-    // }),
+    new ExtractTextPlugin({
+      filename: '[name].[md5:contenthash:hex:8].css',
+      allChunks: true
+    }),
     // 配合babel-plugin-lodash按需加载lodash
     new LodashModuleReplacementPlugin(),
     // js压缩
@@ -104,15 +116,12 @@ let config = merge(baseWebpackConfig, {
         collapseWhitespace: true,
         removeAttributeQuotes: true
       },
-      chunks: ['manifest', 'vendor', 'common','app'],
+      chunks: ['manifest', 'vendor', 'common', 'app'],
       extra: [],
       hash: false,
       chunksSortMode: 'dependency'
     })
-  ],
-  externals: {
-    'BMap': 'BMap'
-  }
+  ]
 
 });
 

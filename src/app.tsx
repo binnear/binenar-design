@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Provider } from 'react-redux';
 import store from 'store'
-import Test from 'components/test/test'
+import Index from 'components/index/index'
 import {
     BrowserRouter as Router,
     Route,
@@ -13,8 +13,7 @@ export class App extends React.Component {
         return <Provider store={store}>
             <Router>
                 <React.Fragment>
-                    <Route path="/" component={Test} />
-                    <Route path="/love" component={Test}></Route>
+                    <Route path="/" component={Index} />
                 </React.Fragment>
             </Router>
         </Provider>
