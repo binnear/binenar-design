@@ -61,7 +61,7 @@ let config = merge(baseWebpackConfig, {
       },
       {
         test: /\.(png|jpg|gif|ttf|eot|woff|woff2|svg)$/,
-        loader: 'url-loader?limit=8192&name=[name].[hash:8].[ext]&outputPath=dist/imgs/'
+        loader: 'url-loader?limit=8192&name=[name].[hash:8].[ext]&outputPath=imgs/'
       },
       {
         test: /\.swf$/,
