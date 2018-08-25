@@ -1,21 +1,26 @@
 import { combineReducers } from 'redux';
 import {
-  TEST
+  UPDATECSS
 } from '../actions';
 
 export let initialState = {
-  test: {
-    data: 'test'
+  cssProper: {
+    transform: 'rotate(0deg)'
   }
 }
 
+interface Action {
+  type: string,
+  payload: object
+}
+
 let reducers = combineReducers({
-  test(state = {}, action: any) {
+  cssProper(state = {}, action: Action) {
     switch (action.type) {
-      case TEST:
+      case UPDATECSS:
         return {
           ...state,
-          data: action.payload
+          ...action.payload
         }
         break
       default:
