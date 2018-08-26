@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --devtool eval --config config/webpack.dev.conf.js",
-    "build": "SET BABEL_ENV=production && webpack --config config/webpack.prod.conf.js"
+    "build": "npm run clean && SET BABEL_ENV=production && webpack --config config/webpack.prod.conf.js",
+    "clean": "rimraf dist"
   },
   "author": "binnear",
   "license": "MIT",
@@ -59,6 +60,7 @@
     "progress-bar-webpack-plugin": "^1.11.0",
     "react-dev-utils": "^5.0.0",
     "redux-logger": "^3.0.6",
+    "rimraf": "^2.6.2",
     "source-map-loader": "^0.2.3",
     "style-loader": "^0.20.3",
     "ts-loader": "^4.4.2",
