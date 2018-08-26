@@ -1,5 +1,5 @@
 import * as React from 'react';
-import ContentEditable from 'components/contentEditable/contentEditable';
+import Contenteditable from 'react-contenteditable-b';
 import { connect } from 'react-redux';
 import { updatecss } from 'actions';
 const s = require('./editorpanel.pcss');
@@ -9,10 +9,7 @@ interface Props {
   },
   updatecss: Function
 }
-interface State {
-}
-class Editorpanel extends React.Component<Props> {
-  state: State
+class Editorpanel extends React.Component<Props, any> {
   constructor(props: Props) {
     super(props)
     this.onChange = this.onChange.bind(this)
@@ -28,7 +25,7 @@ class Editorpanel extends React.Component<Props> {
     return <div className={s.editorpanel}>
       <pre>
         <span>transform: </span>
-        <ContentEditable
+        <Contenteditable
           initHtml={transform}
           onChange={this.onChange}
         />

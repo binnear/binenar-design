@@ -1,7 +1,5 @@
 import * as React from 'react';
-import ContentEditable from 'components/contentEditable/contentEditable';
 import { connect } from 'react-redux';
-import { updatecss } from 'actions';
 const s = require('./mountPanel.pcss');
 const row = require('public/images/row.jpg')
 interface Props {

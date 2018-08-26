@@ -22,19 +22,12 @@ let config = merge(baseWebpackConfig, {
           "babel-loader",
           "source-map-loader"
         ],
-        exclude: [
-          path.resolve(__dirname, "../node_modules")
-        ],
+        exclude: /node_modules/
       },
       {
         test: /\.tsx?$/,
         loader: "awesome-typescript-loader",
-        include: [
-          path.resolve(__dirname, "../src")
-        ],
-        exclude: [
-          path.resolve(__dirname, "../node_modules")
-        ],
+        exclude: /node_modules/
       },
       {
         test: /\.pcss$/,
