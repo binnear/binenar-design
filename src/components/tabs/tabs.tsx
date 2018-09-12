@@ -67,12 +67,12 @@ class Tabs extends React.Component<TabsProps, State> {
     const currentTar: any = document.getElementsByClassName(s.item)[Number(activeKey) - 1]
     const panelSwitchDes = `-${(Number(activeKey) - 1) * 100}%`
     const borderDes = currentTar.offsetLeft
-    this.setState({ panelSwitchDes, borderDes })
+    this.setState({ panelSwitchDes, borderDes, activeKey })
   }
 
   getTabHeads() {
+    let { activeKey } = this.state;
     const { children } = this.props;
-    const { activeKey } = this.state;
 
     return React.Children.map(children, (child: any) => {
       const { key } = child
