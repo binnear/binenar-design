@@ -22,25 +22,34 @@ let config = merge(baseWebpackConfig, {
           "babel-loader",
           "source-map-loader"
         ],
-        exclude: [
-          path.resolve(__dirname, "../node_modules")
-        ],
+        exclude: /node_modules/
       },
-      { 
-        test: /\.tsx?$/, 
-        loader: "awesome-typescript-loader", 
-        include: [
-          path.resolve(__dirname, "../src")
-        ],
-        exclude: [
-          path.resolve(__dirname, "../node_modules")
-        ],
+      {
+        test: /\.tsx?$/,
+        loader: "awesome-typescript-loader",
+        exclude: /node_modules/
       },
       {
         test: /\.pcss$/,
-        use: ['style-loader?sourceMap',
-          'css-loader?modules&importLoaders=1&localIdentName=[name]-[local]-[hash:base64:5]',
-          'postcss-loader?sourceMap']
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: require.resolve('typings-for-css-modules-loader'),    // 该插件用于生成 CSS 文件的 d.ts 文件，便于 TS 使用
+            options: {
+              importLoaders: 1,
+              modules: true,
+              namedExport: true,
+              camelCase: true,
+              minimize: true,
+              localIdentName: '[name]-[local]-[hash:base64:5]',
+            },
+          },
+          {
+            loader: require.resolve('postcss-loader'),
+          },
+        ],
       },
       {
         test: /\.less$/,
@@ -75,7 +84,7 @@ let config = merge(baseWebpackConfig, {
         collapseWhitespace: true,
         removeAttributeQuotes: true
       },
-      chunks: ['manifest', 'vendor', 'common','app'],
+      chunks: ['manifest', 'vendor', 'common', 'app'],
       extra: [],
       hash: false,
       chunksSortMode: 'dependency'

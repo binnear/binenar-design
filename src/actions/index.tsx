@@ -1,8 +1,8 @@
-export const TEST = 'TEST';
+export const UPDATECSS = 'UPDATECSS';
 
-export function test(data: any) {
+export function updatecss(data: object) {
   return {
-    type: TEST,
+    type: UPDATECSS,
     payload: data
   }
 }

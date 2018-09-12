@@ -11,6 +11,8 @@ let config = {
       actions: path.resolve(__dirname, '../src/actions'),
       reducers: path.resolve(__dirname, '../src/reducers'),
       store: path.resolve(__dirname, '../src/store'),
+      public: path.resolve(__dirname, '../src/public'),
+      container: path.resolve(__dirname, '../src/container'),
     }
   },
   optimization: {
