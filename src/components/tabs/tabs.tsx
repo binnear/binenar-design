@@ -1,69 +1,93 @@
 import * as React from 'react';
 import classnames from 'classnames';
 const s = require('./tabs.pcss');
-interface Props {
-  defaultActiveKey: string,
-  onChange: Function
+
+interface TabsProps {
+  activeKey?: string,
+  onChange?: Function,
+  defaultActiveKey?: string,
+}
+interface TabPanel {
+  tab: string,
+  key: string,
+  children: any
 }
 interface State {
-  currentKey: string,
-  marginLeft: string,
-  offsetLeft: number,
+  activeKey: string,
+  borderDes: number,
+  panelSwitchDes: string,
 }
-class Tabs extends React.Component<Props, State> {
-  tabItem: any
-  constructor(props: Props) {
+
+class Tabs extends React.Component<TabsProps, State> {
+  constructor(props: TabsProps) {
     super(props)
-    this.getTabs = this.getTabs.bind(this)
-    this.tabItem = React.createRef();
+    this.getTabHeads = this.getTabHeads.bind(this)
+    this.setNextState = this.setNextState.bind(this)
     this.state = {
-      currentKey: '1',
-      marginLeft: '-0%',
-      offsetLeft: 0
+      borderDes: 0,
+      activeKey: '1',
+      panelSwitchDes: '-0%',
     }
   }
 
-  static TabPane = (props: any) => {
+  static TabPane = (props: TabPanel) => {
     return <div className={s.tabPanelItem}>
       {props.children}
     </div>
   }
 
+  componentWillReceiveProps(props: TabsProps) {
+    if ('activeKey' in props) {
+      this.setNextState(props.activeKey)
+    }
+  }
+
   componentDidMount() {
-    const { defaultActiveKey } = this.props;
-    const marginLeft = `-${(Number(defaultActiveKey) - 1) * 100}%`
-    const offsetLeft = this.tabItem.current.offsetLeft
-    this.setState({
-      marginLeft,
-      offsetLeft,
-      currentKey: defaultActiveKey,
-    })
+    let { activeKey } = this.state;
+
+    if ('defaultActiveKey' in this.props) {
+      activeKey = this.props.defaultActiveKey
+    } else if ('activeKey' in this.props) {
+      activeKey = this.props.activeKey
+    }
+
+    this.setNextState(activeKey)
   }
 
-  onChange(e: any, key: string) {
-    const offsetLeft = e.target.offsetLeft
+  onChange(activeKey: string) {
     const { onChange } = this.props;
-    const marginLeft = `-${(Number(key) - 1) * 100}%`
-    this.setState({ currentKey: key, marginLeft, offsetLeft });
-    onChange(key)
+    const preKey = this.state.activeKey;
+
+    if (!('activeKey' in this.props)) this.setNextState(activeKey)
+
+    onChange(preKey, activeKey)
   }
 
-  getTabs() {
-    const { children, defaultActiveKey } = this.props;
-    const { currentKey } = this.state;
+  setNextState(activeKey: string) {
+    const currentTar: any = document.getElementsByClassName(s.item)[Number(activeKey) - 1]
+    const panelSwitchDes = `-${(Number(activeKey) - 1) * 100}%`
+    const borderDes = currentTar.offsetLeft
+    this.setState({ panelSwitchDes, borderDes })
+  }
+
+  getTabHeads() {
+    const { children } = this.props;
+    const { activeKey } = this.state;
+
     return React.Children.map(children, (child: any) => {
       const { key } = child
       const { tab } = child.props
       const classes = classnames({
         [s.item]: true,
-        [s.active]: currentKey === key
+        [s.active]: activeKey === key
       })
-      return <div className={classes} ref={defaultActiveKey === key ? this.tabItem : null} onClick={e => { this.onChange(e, key) }}>{tab}</div>
+      return <div className={classes} onClick={e => this.onChange(key)}>{tab}</div>
     })
   }
 
-  getTabPanel() {
+  getTabPanels() {
     const { children } = this.props;
+
     return React.Children.map(children, (child: any) => {
       return child
     })
@@ -71,15 +95,14 @@ class Tabs extends React.Component<Props, State> {
 
 
   render() {
-    const { marginLeft, offsetLeft } = this.state;
-    const { children } = this.props
+    const { panelSwitchDes, borderDes } = this.state;
     return <div className={s.tab}>
       <div className={s.tabHeadList}>
-        {this.getTabs()}
-        <div className={s.activeBar} style={{ transform: `translate(${offsetLeft}px, 0)` }}></div>
+        {this.getTabHeads()}
+        <div className={s.activeBar} style={{ transform: `translate(${borderDes}px, 0)` }}></div>
       </div>
-      <div className={s.tabPanel} style={{ marginLeft: marginLeft }}>
-        {this.getTabPanel()}
+      <div className={s.tabPanel} style={{ marginLeft: panelSwitchDes }}>
+        {this.getTabPanels()}
       </div>
     </div>
   }
