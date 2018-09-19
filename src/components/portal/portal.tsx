@@ -4,7 +4,7 @@ import { createPortal } from 'react-dom';
 const s = require('./portal.pcss');
 interface Props {
   children: any,
-  visible: boolean,
+  // visible: boolean,
 }
 
 class Portal extends React.Component<Props> {
@@ -15,15 +15,9 @@ class Portal extends React.Component<Props> {
     document.body.appendChild(this.node);
   }
 
-  componentWillUnmount() {
-    document.body.removeChild(this.node);
-  }
-
-
   render() {
-    const { visible } = this.props;
-    return visible && createPortal(
-      <div>{this.props.children}</div>,
+    return createPortal(
+      this.props.children,
       this.node
     )
   }
