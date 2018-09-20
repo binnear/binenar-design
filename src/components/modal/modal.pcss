@@ -11,33 +11,20 @@
     background: #fff;
     margin: auto;
     background: #000;
-    transition: all .2s linear;
   }
 
-  .modal-wrapper-in-appear {
+  .modal-wrapper-enter {
     transform: scale(0);
-    
   }
-  .modal-wrapper-in-active {
-    transform: scale(1.1);
-  }
-  .modal-wrapper-in-end {
+
+  .modal-wrapper-enter-active {
     transform: scale(1);
-    transition: all .1s linear;
+    transition: all .3s linear;
   }
 
-  .modal-wrapper-out {
-    transform: scale(1);
-  }
-
-  .modal-wrapper-out-active {
-    transform: scale(1.1);
-    transition: all .1s linear;
-  }
-
-  .modal-wrapper-out-end {
+  .modal-wrapper-leave-active {
     transform: scale(0);
-    transition: all .2s linear;
+    transition: all .3s linear;
   }
 
   .modal-mask {

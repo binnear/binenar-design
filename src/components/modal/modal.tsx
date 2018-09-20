@@ -1,6 +1,6 @@
 import * as React from 'react';
-import classnames from 'classnames';
 import Portal from 'components/portal/portal'
+import Transition from 'components/transition/transition'
 
 const s = require('./modal.pcss');
 interface Props {
@@ -9,8 +9,7 @@ interface Props {
 }
 
 interface State {
-  visible: boolean,
-  classes: string,
+  visible: boolean
 }
 
 class Modal extends React.Component<Props, State> {
@@ -20,53 +19,35 @@ class Modal extends React.Component<Props, State> {
     this.close = this.close.bind(this)
     this.modal = React.createRef()
     this.state = {
-      visible: false,
-      classes: null,
+      visible: false
     }
   }
 
   componentWillReceiveProps(props: Props) {
-    const classes = classnames({
-      'modal-wrapper': true,
-      'modal-wrapper-in-active': props.visible,
-      'modal-wrapper-out-active': !props.visible,
-    })
-    if (!props.visible) {
-      this.setState({ classes })
-      setTimeout(_ => {
-        this.setState({ classes: 'modal-wrapper modal-wrapper-out-end' })
-      }, 100)
-      setTimeout(e => {
-        this.setState({ visible: props.visible })
-      }, 300)
-    } else {
-      this.setState({ visible: props.visible })
-      setTimeout(e => {
-        this.setState({ classes })
-      }, 0)
-      setTimeout(e => {
-        this.setState({ classes: 'modal-wrapper modal-wrapper-in-end' })
-      }, 300)
-    }
-
+    this.setState({ visible: props.visible })
 
   }
 
   close() {
-      this.modal.current.classList.remove('show')
-      this.modal.current.classList.add('hide')
-      // setTimeout(_=>{
-      //   this.setState({ visible: false })
-      // }, 1000)
+    this.setState({ visible: false })
   }
 
 
   render() {
-    const { visible, classes } = this.state
-    return visible && <div ref={this.modal} onClick={this.close} className={classes ? classes : "modal-wrapper modal-wrapper-in-appear"}>
-      {this.props.children}
-    </div>
-    // </Portal>
+    const { visible } = this.state
+    return <Portal>
+      <Transition
+        show={visible}
+        transitionName="modal-wrapper"
+        enterActiveTimeout={300}
+        leaveActiveTimeout={300}
+      >
+        <div className="modal-wrapper" onClick={this.close}>
+          {this.props.children}
+        </div>
+      </Transition>
+
+    </Portal>
   }
 }
 
