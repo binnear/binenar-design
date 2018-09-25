@@ -22,16 +22,31 @@ class Head extends React.Component<Props, State> {
   }
 
   componentDidMount() {
+    // document.querySelector('.button').addEventListener('click',(e:any)=>{
+    //   // e.stopPropagation()
+    //   // e.preventDefault()
+    //   console.log(1)
+    //   // return false
+    // })
 
+    // document.querySelector(`.${s.head}`).addEventListener('click', (e:any)=>{
+    //   console.log(4)
+    // }, true)
   }
 
   changeTabs(preKey: string, activeKey: string) {
     this.setState({ activeKey })
   }
 
-  clickme() {
+  clickme(e:any) {
+    e.preventDefault()
+    console.log(2)
     const { visible } = this.state
     this.setState({ visible: !visible })
+  }
+
+  clicke(e:any) {
+    console.log(3)
   }
 
 
@@ -43,12 +58,13 @@ class Head extends React.Component<Props, State> {
         <TabPane tab="LIFE" key="2">LIFE</TabPane>
         <TabPane tab="WORK" key="3">WORK</TabPane>
       </Tabs>
-      <button onClick={this.clickme}>click me</button>
-      <Modal visible={visible}>
+      {/* <button className="button" onClick={this.clickme}>click me</button> */}
+      {/* <Modal visible={visible}>
         这是一个基于portal的Modal
-      </Modal>
+      </Modal> */}
     </div>
   }
 }
+
 
 export default Head
