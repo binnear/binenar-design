@@ -1,9 +1,8 @@
 import * as React from 'react';
 import Head from 'components/head/head';
 import Foot from 'components/foot/foot';
-import Enhance from 'components/enhance/enhance';
-import Student from 'components/student/student';
-const EnhanceStudent: any = Enhance(Student)
+import Canvas from 'components/canvas/canvas';
+import Portal from 'components/portal/portal';
 const s = require('./root.pcss');
 interface Props {
 
@@ -21,7 +20,9 @@ class Root extends React.Component {
   render() {
     return <div className={s.root}>
       <Head />
-      <EnhanceStudent />
+      <Portal>
+        <Canvas />
+      </Portal>
       <Foot />
     </div>
   }

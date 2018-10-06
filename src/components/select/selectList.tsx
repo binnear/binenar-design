@@ -8,7 +8,7 @@ interface State {
 
 }
 
-export default class SelectInput extends React.Component<Props, State> {
+export default class SelectList extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
@@ -17,8 +17,8 @@ export default class SelectInput extends React.Component<Props, State> {
   }
 
   render() {
-    return <div className="selectInput">
-      <input type="text"/>
+    return <div className="selectList">
+      
     </div>
   }
 }
