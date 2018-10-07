@@ -53,7 +53,7 @@ let config = merge(baseWebpackConfig, {
               },
             },
             {
-              loader:'postcss-loader',
+              loader: 'postcss-loader',
             },
           ],
           fallback: 'style-loader',
@@ -121,7 +121,18 @@ let config = merge(baseWebpackConfig, {
       hash: false,
       chunksSortMode: 'dependency'
     })
-  ]
+  ],
+  stats: {
+    assets: true,
+    builtAt: true,
+    chunks: false,
+    entrypoints: false,
+    errorDetails: true,
+    modules: false,
+    moduleTrace: true,
+    providedExports: false,
+    usedExports: false,
+  }
 
 });
 
