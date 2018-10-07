@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import store from 'store'
 import Root from 'container/root/root';
 import 'public/css/common.pcss';
+import 'public/css/iconfont.pcss';
 import {
     BrowserRouter as Router,
     Route,

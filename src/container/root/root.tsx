@@ -1,8 +1,8 @@
 import * as React from 'react';
-import Head from 'components/head/head';
 import Foot from 'components/foot/foot';
 import Canvas from 'components/canvas/canvas';
 import Portal from 'components/portal/portal';
+import Content from 'container/content/content';
 const s = require('./root.pcss');
 interface Props {
 
@@ -19,10 +19,10 @@ class Root extends React.Component {
 
   render() {
     return <div className={s.root}>
-      <Head />
       <Portal>
         <Canvas />
       </Portal>
+      <Content />
       <Foot />
     </div>
   }

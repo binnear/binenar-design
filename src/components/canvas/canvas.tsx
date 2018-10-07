@@ -17,6 +17,7 @@ class Canvas extends React.Component<Props, State> {
   dots: Array<Dot>
   dotsMinDist: number
   mouseMoveChecker: any
+  mouseMoving: boolean
   maxDistFromCursor: number
   initStarsPopulation: number
   canvas: any
@@ -32,6 +33,7 @@ class Canvas extends React.Component<Props, State> {
     this.dots = [];
     this.dotsMinDist = 2;
     this.mouseMoveChecker;
+    this.mouseMoving = false;
     this.maxDistFromCursor = 50;
     this.initStarsPopulation = 80;
   }
@@ -43,12 +45,22 @@ class Canvas extends React.Component<Props, State> {
     this.init();
     let _this = this
     window.onmousemove = (e) => {
+      _this.mouseMoving = true;
       _this.mouseX = e.clientX;
       _this.mouseY = e.clientY;
+      clearInterval(_this.mouseMoveChecker);
+      _this.mouseMoveChecker = setTimeout(function () {
+        _this.mouseMoving = false;
+      }, 100);
     }
     window.ontouchmove = function (e) {
+      _this.mouseMoving = true;
       _this.mouseX = e.changedTouches[0].clientX;
       _this.mouseY = e.changedTouches[0].clientY;
+      clearInterval(_this.mouseMoveChecker);
+      _this.mouseMoveChecker = setTimeout(function () {
+        _this.mouseMoving = false;
+      }, 100);
     }
   }
 
@@ -62,12 +74,19 @@ class Canvas extends React.Component<Props, State> {
   init() {
     this.ctx.strokeStyle = "white";
     this.ctx.shadowColor = "white";
+    // for (var i = 0; i < initStarsPopulation; i++) {
+    //   stars[i] = new Star(i, Math.floor(Math.random() * WIDTH), Math.floor(Math.random() * HEIGHT));
+    //   //stars[i].draw();
+    // }
     this.ctx.shadowBlur = 0;
     this.animate();
   }
 
   animate() {
     this.ctx.clearRect(0, 0, this.WIDTH, this.HEIGHT);
+    // for (var i in stars) {
+    //   stars[i].move();
+    // }
     for (var i in this.dots) {
       this.dots[i].move();
     }
@@ -76,6 +95,7 @@ class Canvas extends React.Component<Props, State> {
   }
 
   drawIfMouseMoving() {
+    if (!this.mouseMoving) return;
     if (this.dots.length == 0) {
       this.dots[0] = new Dot(0, this.mouseX, this.mouseY, this.ctx, this.dots);
       this.dots[0].draw();

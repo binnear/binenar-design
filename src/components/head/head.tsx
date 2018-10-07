@@ -12,7 +12,7 @@ class Head extends React.Component<Props, State> {
 
   render() {
     return <div className={s.head}>
-      <a href="/blog">Blog</a>
+      <i className="iconfont icon-github"></i>
     </div>
   }
 }
