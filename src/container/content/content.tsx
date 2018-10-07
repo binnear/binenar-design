@@ -2,16 +2,9 @@ import * as React from 'react';
 const s = require('./content.pcss');
 const paint1 = require('public/images/paint1.svg');
 const paint2 = require('public/images/paint2.svg');
-interface Props {
 
-}
-class Content extends React.Component {
-  constructor(props: Props) {
-    super(props)
-  }
-
-  render() {
-    return <div className={s.content}>
+export default function Content() {
+  return <div className={s.content}>
       <span className={s.paint} style={{ background: `no-repeat 0% 44%/94% url(${paint1})` }}>
         <i className="iconfont icon-blog"></i>
         <a href="/blog/" >Blog</a>
@@ -23,7 +16,4 @@ class Content extends React.Component {
 
       </span>
     </div>
-  }
 }
-
-export default Content

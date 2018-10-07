@@ -4,7 +4,7 @@
         "sourceMap": true,
         "noImplicitAny": true,
         "module": "commonjs",
-        "target": "es5",
+        "target": "es6",
         "jsx": "react",
         "baseUrl": "./src",
         "paths": {
@@ -12,10 +12,14 @@
             "actions": ["actions"],
             "reducers": ["reducers"],
             "store": ["store"]
-        }
+        },
+        "lib": ["dom","es2015","es2015.promise"]
     },
     "include": [
         "./src/**/*"
+    ],
+    "exclude": [
+        "node_modules"
     ],
     "typeRoots": [
         "./node_modules/@types",

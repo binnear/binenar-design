@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Dog from 'components/dog/dog';
 import Foot from 'components/foot/foot';
 import Canvas from 'components/canvas/canvas';
 import Portal from 'components/portal/portal';
@@ -21,6 +22,9 @@ class Root extends React.Component {
     return <div className={s.root}>
       <Portal>
         <Canvas />
+      </Portal>
+      <Portal>
+        <Dog />
       </Portal>
       <Content />
       <Foot />

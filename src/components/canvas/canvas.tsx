@@ -39,7 +39,7 @@ class Canvas extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    this.canvas = document.getElementById('canvas')
+    this.canvas = document.getElementById('dotCanvas')
     this.ctx = this.canvas.getContext('2d')
     this.setCanvasSize();
     this.init();
@@ -117,7 +117,7 @@ class Canvas extends React.Component<Props, State> {
   }
 
   render() {
-    return <canvas id="canvas" className={s.canvas}></canvas>
+    return <canvas id="dotCanvas" className={s.canvas}></canvas>
   }
 }
 
