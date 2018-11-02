@@ -5,7 +5,7 @@
   "main": "./src/index.tsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --devtool eval --config config/webpack.dev.conf.js",
+    "start": "webpack-dev-server --devtool eval --config config/webpack.dev.conf.js",
     "build": "npm run clean && SET BABEL_ENV=production && webpack --config config/webpack.prod.conf.js",
     "clean": "rimraf dist"
   },

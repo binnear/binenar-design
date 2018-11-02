@@ -2,21 +2,49 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="edge">
-    <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
-    <meta name="applicable-device" content="pc">
-    <meta name="baidu-site-verification" content="eiYnuWzotY" />
-    <link href="https://fonts.googleapis.com/css?family=Nunito:400,700|Fugaz+One" rel="stylesheet">
-    <link rel="shortcut icon" type="image/x-icon" href="https://binnear-1256688074.cos.ap-guangzhou.myqcloud.com/favicon1.ico">
-    <title>Binnear-my private site</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="edge">
+  <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
+  <meta name="applicable-device" content="pc">
+  <meta name="baidu-site-verification" content="eiYnuWzotY" />
+  <link href="https://fonts.googleapis.com/css?family=Nunito:400,700|Fugaz+One" rel="stylesheet">
+  <link rel="shortcut icon" type="image/x-icon" href="https://binnear-1256688074.cos.ap-guangzhou.myqcloud.com/favicon1.ico">
+  <title>Binnear-my private site</title>
+  <script type="text/javascript">
+    var _czc = _czc || [];
+  </script>
 </head>
 
 <body>
-    <div id="root"></div>
-    <% for (var i = 0; i < htmlWebpackPlugin.options.extra.length;i++) { %>
-        <script type="text/javascript" src="<%=htmlWebpackPlugin.options.extra[i] %>"></script>
-    <% } %>
+  <div id="root"></div>
+  <% for (var i = 0; i < htmlWebpackPlugin.options.extra.length;i++) { %>
+  <script type="text/javascript" src="<%=htmlWebpackPlugin.options.extra[i] %>"></script>
+  <% } %>
+
+  <script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://"); document.write(unescape("%3Cspan id='cnzz_stat_icon_1275202694'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/z_stat.php%3Fid%3D1275202694' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+
+  <script type="text/javascript">
+    _czc.push(["_trackPageview", "/"]);
+  </script>
+
+
+  <script type="text/javascript">
+    (function () {
+      var loadfn = function () {
+        var dataCnzzEventList = [].slice.call(document.querySelectorAll('[data-cnzz-event]'), 0)
+        dataCnzzEventList.forEach(function (dataCnzzEvent, i) {
+          dataCnzzEvent.addEventListener('click', function (e) {
+            var obj = JSON.parse(e.target.dataset.cnzzEvent)
+            _czc.push(["_trackEvent",obj.category,obj.action,obj.label,obj.value,obj.nodeid]);
+          })
+        })
+      }
+      window.onload = loadfn
+    })()
+  </script>
+
 </body>
 
 </html>
